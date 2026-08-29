@@ -1,0 +1,48 @@
+# Build output
+bin/
+build/
+out/
+cmake-build-*/
+
+# Compiled artifacts
+*.o
+*.obj
+*.lo
+*.a
+*.la
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.d
+
+# macOS and debugger artifacts
+.DS_Store
+*.dSYM/
+*.dSYM
+core
+core.*
+
+# Coverage and profiling output
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+*.prof
+
+# Tool and editor caches
+.cache/
+.clangd/
+.vscode/
+.idea/
+compile_commands.json
+
+# Temporary files and logs
+*.log
+*.tmp
+*.swp
+*.swo
+*~
