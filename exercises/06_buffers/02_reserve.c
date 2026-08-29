@@ -44,6 +44,8 @@ static int buffer_reserve(struct buffer *buffer, size_t additional) {
   if (buffer->length == SIZE_MAX || additional > SIZE_MAX - buffer->length - 1)
     return 0;
 
+  // Extra byte needed for null character
+  // (it is a char* buffer treated as a string)
   size_t new_required_capacity = buffer->length + additional + 1;
 
   if (new_required_capacity <= buffer->capacity) {
