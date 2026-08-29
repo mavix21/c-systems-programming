@@ -58,21 +58,32 @@ static int vector_reserve(struct int_vector *vector, size_t additional) {
 }
 
 static int vector_push(struct int_vector *vector, int value) {
-  /* TODO: reserva un elemento, escribe value y aumenta length. */
   if (!vector_reserve(vector, 1))
     return 0;
 
   vector->items[vector->length] = value;
   vector->length++;
 
-  return 0;
+  return 1;
 }
 
 static int vector_pop(struct int_vector *vector, int *out_value) {
-  /* TODO: maneja el vector vacio y retira el ultimo elemento. */
-  (void)vector;
-  (void)out_value;
-  return 0;
+  int last_element;
+
+  if (vector == NULL || out_value == NULL) {
+    return 0;
+  }
+
+  if (vector->length == 0) {
+    return 0;
+  }
+
+  last_element = vector->items[vector->length - 1];
+  vector->length--;
+
+  *out_value = last_element;
+
+  return 1;
 }
 
 int main(void) {
