@@ -25,6 +25,8 @@ static void vector_destroy(struct int_vector *vector) {
 
 static int vector_reserve(struct int_vector *vector, size_t additional) {
   size_t new_min_required_capacity = 0;
+  size_t new_capacity = 0;
+  int *new_items;
 
   if (vector == NULL) {
     return 0;
@@ -40,7 +42,7 @@ static int vector_reserve(struct int_vector *vector, size_t additional) {
     return 1;
   }
 
-  size_t new_capacity = vector->length == 0 ? 8 : vector->capacity;
+  new_capacity = vector->length == 0 ? 8 : vector->capacity;
 
   while (new_capacity < new_min_required_capacity) {
     if (new_capacity > SIZE_MAX / 2) {
@@ -55,8 +57,7 @@ static int vector_reserve(struct int_vector *vector, size_t additional) {
     return 0;
   }
 
-  int *new_items =
-      realloc(vector->items, new_capacity * sizeof(*vector->items));
+  new_items = realloc(vector->items, new_capacity * sizeof(*vector->items));
   if (new_items == NULL) {
     return 0;
   }
