@@ -11,56 +11,64 @@
 #include "exercise.h"
 
 struct int_vector {
-	int *items;
-	size_t length;
-	size_t capacity;
+  int *items;
+  size_t length;
+  size_t capacity;
 };
 
-static void vector_destroy(struct int_vector *vector)
-{
-	if (vector == NULL)
-		return;
-	free(vector->items);
-	*vector = (struct int_vector){0};
+static void vector_destroy(struct int_vector *vector) {
+  if (vector == NULL)
+    return;
+  free(vector->items);
+  *vector = (struct int_vector){0};
 }
 
 static int vector_remove(struct int_vector *vector, size_t index,
-	int *out_value)
-{
-	/* TODO: valida, guarda, desplaza a la izquierda y reduce length. */
-	(void)vector;
-	(void)index;
-	(void)out_value;
-	return 0;
+                         int *out_value) {
+  if (vector == NULL || out_value == NULL) {
+    return 0;
+  }
+
+  if (index >= vector->length) {
+    return 0;
+  }
+
+  *out_value = vector->items[index];
+
+  memmove(&vector->items[index], &vector->items[index + 1],
+          (vector->length - index - 1) * sizeof(*vector->items));
+
+  vector->length--;
+
+  return 1;
 }
 
-int main(void)
-{
-	struct int_vector vector = {0};
-	int removed = 0;
+int main(void) {
+  struct int_vector vector = {0};
+  int removed = 0;
 
-	vector.items = malloc(4 * sizeof(*vector.items));
-	if (vector.items == NULL)
-		return 1;
-	vector.items[0] = 10;
-	vector.items[1] = 20;
-	vector.items[2] = 30;
-	vector.items[3] = 40;
-	vector.length = 4;
-	vector.capacity = 4;
+  vector.items = malloc(4 * sizeof(*vector.items));
+  if (vector.items == NULL)
+    return 1;
+  vector.items[0] = 10;
+  vector.items[1] = 20;
+  vector.items[2] = 30;
+  vector.items[3] = 40;
+  vector.length = 4;
+  vector.capacity = 4;
 
-	if (!vector_remove(&vector, 1, &removed) || removed != 20) {
-		fprintf(stderr, "FAIL vector_remove\n");
-		vector_destroy(&vector);
-		return 1;
-	}
-	if (vector.length != 3 || vector.capacity != 4 || vector.items[0] != 10 ||
-		vector.items[1] != 30 || vector.items[2] != 40) {
-		fprintf(stderr, "FAIL estado posterior a remove\n");
-		vector_destroy(&vector);
-		return 1;
-	}
+  if (!vector_remove(&vector, 1, &removed) || removed != 20) {
+    fprintf(stderr, "FAIL vector_remove\n");
+    vector_destroy(&vector);
+    return 1;
+  }
+  if (vector.length != 3 || vector.capacity != 4 || vector.items[0] != 10 ||
+      vector.items[1] != 30 || vector.items[2] != 40) {
+    fprintf(stderr, "FAIL estado posterior a remove\n");
+    vector_destroy(&vector);
+    return 1;
+  }
 
-	vector_destroy(&vector);
-	return exercise_passed();
+  vector_destroy(&vector);
+  return exercise_passed();
 }
