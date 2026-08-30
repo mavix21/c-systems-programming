@@ -155,6 +155,25 @@ Empieza con:
 make sanitize EXERCISE=08_collections/01_vector_lifecycle
 ```
 
+## Bloque de listas y colas
+
+Estas katas introducen estructuras enlazadas y almacenamiento circular:
+
+```text
+09_queues/01_linked_push_front
+09_queues/02_linked_append
+09_queues/03_linked_remove
+09_queues/04_fifo_queue
+09_queues/05_ring_buffer
+09_queues/06_command_history
+```
+
+Empieza con:
+
+```sh
+make sanitize EXERCISE=09_queues/01_linked_push_front
+```
+
 ## C17 frente al C de Holberton/ALX
 
 Muchos proyectos historicos de Holberton/ALX usan GNU89 y reglas de estilo

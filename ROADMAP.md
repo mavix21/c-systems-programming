@@ -41,6 +41,9 @@ Aplicacion final: historial, mensajes, comandos recientes y cache.
 Progresion actual: vector de enteros, operaciones de insercion y eliminacion,
 vector generico, ownership profundo de strings y lista de mensajes del chat.
 
+El bloque siguiente cubre listas enlazadas, cola FIFO, ring buffer e historial
+circular de comandos. Estas primitivas preparan el event loop y la cache LRU.
+
 ## 4. Archivos y configuracion
 
 - `FILE *`, modos, posicion y estados de error
