@@ -20,15 +20,43 @@ struct list {
 };
 
 static int list_push_front(struct list *list, int value) {
-  /* TODO: reserva un nodo y conviertelo en el nuevo head. */
-  (void)list;
-  (void)value;
-  return 0;
+  struct node *new_node;
+
+  if (list == NULL) {
+    return 0;
+  }
+
+  new_node = malloc(sizeof(struct node));
+  if (new_node == NULL) {
+    return 0;
+  }
+
+  new_node->value = value;
+  new_node->next = list->head;
+
+  list->head = new_node;
+  list->length++;
+
+  return 1;
 }
 
 static void list_destroy(struct list *list) {
-  /* TODO: guarda next antes de liberar cada nodo y reinicia la lista. */
-  (void)list;
+  struct node *current;
+  struct node *next;
+
+  if (list == NULL) {
+    return;
+  }
+
+  current = list->head;
+
+  while (current != NULL) {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+
+  *list = (struct list){0};
 }
 
 int main(void) {
