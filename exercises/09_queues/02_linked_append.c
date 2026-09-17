@@ -36,10 +36,31 @@ static void list_destroy(struct list *list) {
 }
 
 static int list_append(struct list *list, int value) {
-  /* TODO: reserva un nodo y maneja por separado lista vacia/no vacia. */
-  (void)list;
-  (void)value;
-  return 0;
+  struct node *new_node;
+
+  if (list == NULL) {
+    return 0;
+  }
+
+  new_node = malloc(sizeof(struct node));
+  if (new_node == NULL) {
+    return 0;
+  }
+
+  new_node->value = value;
+  new_node->next = NULL;
+
+  if (list->head == NULL) {
+    list->head = new_node;
+    list->tail = new_node;
+  } else {
+    list->tail->next = new_node;
+    list->tail = new_node;
+  }
+
+  list->length++;
+
+  return 1;
 }
 
 int main(void) {
