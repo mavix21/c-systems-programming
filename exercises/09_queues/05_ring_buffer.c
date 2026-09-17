@@ -16,17 +16,33 @@ struct ring_buffer {
 };
 
 static int ring_push(struct ring_buffer *ring, int value) {
-  /* TODO: calcula tail como (head + length) modulo capacity. */
-  (void)ring;
-  (void)value;
-  return 0;
+  size_t tail;
+
+  if (ring == NULL) {
+    return 0;
+  }
+
+  if (ring->length == RING_CAPACITY) {
+    return 0;
+  }
+
+  tail = (ring->head + ring->length) % RING_CAPACITY;
+  ring->items[tail] = value;
+  ring->length++;
+
+  return 1;
 }
 
 static int ring_pop(struct ring_buffer *ring, int *out_value) {
-  /* TODO: lee head, avanzalo circularmente y reduce length. */
-  (void)ring;
-  (void)out_value;
-  return 0;
+  if (ring == NULL || out_value == NULL || ring->length == 0) {
+    return 0;
+  }
+
+  *out_value = ring->items[ring->head];
+  ring->head = (ring->head + 1) % RING_CAPACITY;
+  ring->length--;
+
+  return 1;
 }
 
 int main(void) {
