@@ -30,11 +30,34 @@ static void history_destroy(struct command_history *history) {
 }
 
 static int history_push(struct command_history *history, const char *command) {
-  /* TODO: copia command y publica la copia; maneja por separado lleno/no lleno.
-   */
-  (void)history;
-  (void)command;
-  return 0;
+  size_t tail;
+  size_t size;
+  char *new_command;
+
+  if (history == NULL || command == NULL) {
+    return 0;
+  }
+
+  size = strlen(command) + 1;
+  new_command = malloc(size * sizeof(*command));
+  if (new_command == NULL) {
+    return 0;
+  }
+
+  memcpy(new_command, command, size);
+
+  tail = (history->head + history->length) % HISTORY_CAPACITY;
+
+  if (history->length == HISTORY_CAPACITY) {
+    free(history->items[tail]);
+    history->head = (history->head + 1) % HISTORY_CAPACITY;
+  } else {
+    history->length++;
+  }
+
+  history->items[tail] = new_command;
+
+  return 1;
 }
 
 static const char *history_at(const struct command_history *history,
