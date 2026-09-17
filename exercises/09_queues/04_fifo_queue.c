@@ -21,24 +21,59 @@ struct queue {
 };
 
 static int queue_enqueue(struct queue *queue, int value) {
-  /* TODO: reserva y enlaza un nodo al tail. */
-  (void)queue;
-  (void)value;
-  return 0;
+  struct queue_node *node;
+
+  if (queue == NULL) {
+    return 0;
+  }
+
+  node = malloc(sizeof(struct queue_node));
+  if (node == NULL) {
+    return 0;
+  }
+  node->value = value;
+  node->next = NULL;
+
+  if (queue->tail != NULL) {
+    queue->tail->next = node;
+  } else {
+    queue->head = node;
+  }
+
+  queue->tail = node;
+  queue->length++;
+
+  return 1;
 }
 
 static int queue_dequeue(struct queue *queue, int *out_value) {
-  /* TODO: retira head, publica su valor y libera el nodo. */
-  (void)queue;
-  (void)out_value;
-  return 0;
+  struct queue_node *node;
+
+  if (queue == NULL || queue->head == NULL || out_value == NULL) {
+    return 0;
+  }
+
+  node = queue->head;
+  *out_value = node->value;
+  queue->head = node->next;
+
+  if (queue->head == NULL) {
+    queue->tail = NULL;
+  }
+
+  free(node);
+  queue->length--;
+
+  return 1;
 }
 
 static void queue_destroy(struct queue *queue) {
   int ignored;
 
-  if (queue == NULL)
+  if (queue == NULL) {
     return;
+  }
+
   while (queue_dequeue(queue, &ignored)) {
   }
 }
