@@ -52,9 +52,37 @@ static void list_destroy(struct list *list) {
 }
 
 static int list_remove_first(struct list *list, int value) {
-  /* TODO: sigue current y previous; contempla head, tail y no encontrado. */
-  (void)list;
-  (void)value;
+  struct node *current;
+  struct node *previous = NULL;
+
+  if (list == NULL || list->length == 0) {
+    return 0;
+  }
+
+  current = list->head;
+
+  while (current != NULL) {
+    if (current->value == value) {
+      if (previous == NULL) {
+        list->head = current->next;
+      } else {
+        previous->next = current->next;
+      }
+
+      if (current == list->tail) {
+        list->tail = previous;
+      }
+
+      free(current);
+      list->length--;
+
+      return 1;
+    }
+
+    previous = current;
+    current = current->next;
+  }
+
   return 0;
 }
 
