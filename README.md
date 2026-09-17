@@ -174,6 +174,50 @@ Empieza con:
 make sanitize EXERCISE=09_queues/01_linked_push_front
 ```
 
+## Bloque de tablas hash
+
+Este bloque construye un registro de herramientas similar al que necesita un
+coding agent para resolver nombres como `read`, `grep` o `edit`:
+
+```text
+10_hash_tables/01_hash_string
+10_hash_tables/02_insert
+10_hash_tables/03_lookup
+10_hash_tables/04_update
+10_hash_tables/05_remove
+10_hash_tables/06_rehash
+10_hash_tables/07_foreach
+```
+
+La progresion cubre hashing determinista, colisiones con separate chaining,
+ownership de claves, crecimiento por load factor y callbacks con contexto.
+
+Empieza con:
+
+```sh
+make sanitize EXERCISE=10_hash_tables/01_hash_string
+```
+
+## Bloque de cache LRU
+
+Estas katas combinan una tabla hash con una lista doblemente enlazada para
+mantener una cache de archivos del workspace. Los lookups promueven archivos a
+MRU y, al llenarse, se expulsa el archivo LRU:
+
+```text
+11_cache/01_doubly_linked_list
+11_cache/02_move_to_front
+11_cache/03_lru_get
+11_cache/04_lru_put
+11_cache/05_lru_eviction
+```
+
+Empieza con:
+
+```sh
+make sanitize EXERCISE=11_cache/01_doubly_linked_list
+```
+
 ## C17 frente al C de Holberton/ALX
 
 Muchos proyectos historicos de Holberton/ALX usan GNU89 y reglas de estilo
