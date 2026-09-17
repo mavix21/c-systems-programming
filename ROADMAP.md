@@ -6,7 +6,7 @@ posteriores.
 
 ## 1. Lenguaje y memoria
 
-Estado: en curso.
+Estado: completado.
 
 - Tipos, funciones, punteros, arrays y strings
 - Structs y contratos de funciones
@@ -16,7 +16,7 @@ Estado: en curso.
 
 ## 2. Buffers dinamicos
 
-Estado: siguiente bloque.
+Estado: completado.
 
 - Ciclo de vida de un buffer
 - Capacidad frente a longitud
@@ -29,6 +29,8 @@ construccion de prompts y lectura de archivos.
 
 ## 3. Colecciones
 
+Estado: en curso.
+
 - Vector dinamico generico
 - Lista de mensajes
 - Cola y ring buffer
@@ -38,11 +40,13 @@ construccion de prompts y lectura de archivos.
 
 Aplicacion final: historial, mensajes, comandos recientes y cache.
 
-Progresion actual: vector de enteros, operaciones de insercion y eliminacion,
-vector generico, ownership profundo de strings y lista de mensajes del chat.
+Progresion completada: vector de enteros, insercion y eliminacion, vector
+generico, ownership profundo de strings, lista de mensajes, listas enlazadas,
+cola FIFO, ring buffer e historial circular de comandos.
 
-El bloque siguiente cubre listas enlazadas, cola FIFO, ring buffer e historial
-circular de comandos. Estas primitivas preparan el event loop y la cache LRU.
+La progresion actual cubre un registro hash de herramientas, callbacks con
+contexto y una cache LRU de archivos del workspace. Estas primitivas preparan
+el registro de tools, la ayuda de comandos y la cache local del agente.
 
 ## 4. Archivos y configuracion
 
